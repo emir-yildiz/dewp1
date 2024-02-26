@@ -1,0 +1,50 @@
+# configuration specific to creating s3 connections
+s3:
+  access_key: 'AWS_ACCESS_KEY_ID'
+  secret_key: 'AWS_SECRET_ACCESS_KEY'
+  src_endpoint_url: 'https://s3.eu-north-1.amazonaws.com'
+  src_bucket: 'dewp-course-bucket'
+  trg_endpoint_url: 'https://s3.eu-north-1.amazonaws.com'
+  trg_bucket: 'dewp-course-bucket'
+  
+# configuration specific to the source
+source:
+    src_columns: ['Year','Industry_aggregation_NZSIOC','Industry_code_NZSIOC','Value']
+    src_col_year: 'Year'
+    src_col_industry_aggregation_knzsioc: 'Industry_aggregation_NZSIOC'
+    src_col_industry_code_nzsioc: 'Industry_code_NZSIOC'
+    src_col_value: 'Value'
+    src_col_year_filter: '2015'
+    src_files_prefix: 'annual-enterprise-survey-2021-financial-year-provisional'
+    src_format: 'csv'
+  
+# configuration specific to the source
+target:
+  trg_columns: ['Year','Industry_aggregation_NZSIOC','Industry_code_NZSIOC','min_value','max_value']
+  trg_col_year: 'Year'
+  trg_col_industry_aggregation_knzsioc: 'Industry_aggregation_NZSIOC'
+  trg_col_industry_code_nzsioc: 'Industry_code_NZSIOC'
+  trg_col_min_value: 'min_value'
+  trg_col_max_value: 'max_value'
+  trg_key: 'aneynual-enterprise-surv'
+  trg_key_date_format: '%Y-%m-%d %H:%M:%S'
+  trg_format: 'parquet'
+
+# configuration specific to the meta file
+meta:
+  meta_key: 'meta/report1/xetra_report1_meta_file.csv'
+
+# Logging configuration
+logging:
+  version: 1
+  formatters:
+    dewp:
+      format: "dewp Transformer - %(asctime)s - %(levelname)s - %(message)s"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: dewp
+      level: DEBUG
+  root:
+    level: DEBUG
+    handlers: [ console ]

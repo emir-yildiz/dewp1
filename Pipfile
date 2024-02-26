@@ -13,6 +13,9 @@ boto3 = "*"
 pyarrow = "*"
 pandoc = "*"
 nbconvert = {extras = ["qtpdf"], version = "*"}
+pyyaml = "*"
+piplint = "*"
+moto = "*"
 
 [dev-packages]
 
